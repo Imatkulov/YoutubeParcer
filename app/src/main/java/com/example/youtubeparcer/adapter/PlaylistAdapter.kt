@@ -10,10 +10,6 @@ import com.example.youtubeparcer.R
 import com.example.youtubeparcer.model.ItemsItem
 import com.squareup.picasso.Picasso
 
-/**
- * Created by Karukes Sergey on
- */
-
 class PlaylistAdapter(val function: (ItemsItem) -> Unit) : RecyclerView.Adapter<PlaylistAdapter.YouTubeViewHolder>() {
 
 

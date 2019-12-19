@@ -31,14 +31,12 @@ class MainActivity : AppCompatActivity() {
         initAdapter()
         fetchPlaylist()
     }
-
     private fun initAdapter() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         adapter = PlaylistAdapter() {item: ItemsItem -> clickItem(item)}
         recycler_view.adapter = adapter
 
     }
-
     private fun clickItem(item: ItemsItem) {
         val intent = Intent(this, DetailPlaylistActivity::class.java)
         intent.putExtra("id", item.id)
@@ -75,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         val data = list?.items
         adapter?.updateData(data)
     }
-
     fun restart(view: View) {
         if (! NetworkUtils.isOnline(applicationContext)){
             showNoConnection(true)
@@ -87,7 +84,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun showNoConnection(isShown : Boolean){
         btnRestart.isShow(isShown)
         imageInet.isShow(isShown)

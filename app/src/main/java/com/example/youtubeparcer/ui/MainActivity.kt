@@ -1,43 +1,66 @@
 package com.example.youtubeparcer.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.youtubeparcer.R
 import com.example.youtubeparcer.adapter.PlaylistAdapter
+import com.example.youtubeparcer.model.ItemsItem
+import com.example.youtubeparcer.model.PlaylistModel
+import com.example.youtubeparcer.ui.detail_playlist.DetailPlaylistActivity
+import com.example.youtubeparcer.utils.UiHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
 
-    private val data = mutableListOf<String>()
-
+    private var viewModel: MainViewModel? = null
     private var adapter: PlaylistAdapter? = null
 
-    var name = "name"
-    val surname = "name"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addDataToList()
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         initAdapter()
-        updateAdapterData(data)
-    }
-
-    private fun addDataToList() {
-        data.add("Hello")
-        data.add("Hi")
-        data.add("Привет")
-        data.add("Салам")
+        fetchPlaylist()
     }
 
     private fun initAdapter() {
         recycler_view.layoutManager = LinearLayoutManager(this)
-        adapter = PlaylistAdapter()
+        adapter = PlaylistAdapter() {item: ItemsItem -> clickItem(item)}
         recycler_view.adapter = adapter
+
     }
 
-    private fun updateAdapterData(list: MutableList<String>) {
-        adapter?.updateData(list)
+    private fun clickItem(item: ItemsItem) {
+        val intent = Intent(this, DetailPlaylistActivity::class.java)
+        intent.putExtra("id", item.id)
+        intent.putExtra("title", item.snippet.title)
+        intent.putExtra("channelTitle", item.snippet.channelId)
+        intent.putExtra("etag", item.etag)
+        startActivity(intent)
     }
+
+    private fun fetchPlaylist() {
+        //TODO check internet
+        val data = viewModel?.getPlaylistData()
+        data?.observe(this, Observer<PlaylistModel> {
+            val model: PlaylistModel? = data.value
+            when {
+                model != null -> {
+                    updateAdapterData(model)
+                }
+            }
+
+        })
+    }
+
+    private fun updateAdapterData(list: PlaylistModel?) {
+        val data = list?.items
+        adapter?.updateData(data)
+    }
+
 }

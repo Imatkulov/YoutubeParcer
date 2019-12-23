@@ -40,18 +40,19 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:2.3.0"
     //recycler view
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-
-    // Lifecycle components
-//    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
-//    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
-//    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androidxArchVersion"
-
     //viewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
-
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
+    //fab
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    //coordinatorlayout
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
 
 
 }

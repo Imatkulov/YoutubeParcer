@@ -10,10 +10,10 @@ import com.example.youtubeparcer.R
 import com.example.youtubeparcer.model.ItemsItem
 import com.squareup.picasso.Picasso
 
-class PlaylistAdapter(val function: (ItemsItem) -> Unit) : RecyclerView.Adapter<PlaylistAdapter.YouTubeViewHolder>() {
+class DetailPlaylistAdapter(val function: (ItemsItem) -> Unit) : RecyclerView.Adapter<DetailPlaylistAdapter.YouTubeViewHolder>() {
 
 
-    private var list = mutableListOf<ItemsItem>()
+    private var list     = mutableListOf<ItemsItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YouTubeViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -33,7 +33,6 @@ class PlaylistAdapter(val function: (ItemsItem) -> Unit) : RecyclerView.Adapter<
         list = newList as MutableList<ItemsItem>
         notifyDataSetChanged()
     }
-
 
     class YouTubeViewHolder(itemView: View, val function: (ItemsItem) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
@@ -59,8 +58,5 @@ class PlaylistAdapter(val function: (ItemsItem) -> Unit) : RecyclerView.Adapter<
                 function(item)
             }
         }
-
     }
-
-
 }

@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="playlist">playlist</style>
+
+    <style name="in_this_ser">in_this</style>
+
+    <style name="emotional_w">emotional1</style>
+
 </resources>

@@ -14,8 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.detail_playlist.DetailPlaylistActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.detail_video.DetailVideoActivity"></activity>
+        <activity android:name=".ui.detail_playlist.DetailPlaylistActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ui.play_list.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

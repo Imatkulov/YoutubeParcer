@@ -1,5 +1,6 @@
 package com.example.youtubeparcer.api
 
+import com.example.youtubeparcer.model.DetailPlaylistModel
 import com.example.youtubeparcer.model.PlaylistModel
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,4 +16,12 @@ interface YoutubeApi {
         @Query("channelId") channelId: String,
         @Query("maxResults") maxResults: String
     ): Call<PlaylistModel>
+
+    @GET("youtube/v3/playlistItems")
+    fun getDetailPlaylists(
+        @Query("part") part: String,
+        @Query("key") apiKey: String,
+        @Query("playlistId") playlistId: String,
+        @Query("maxResults") maxResults: String
+    ): Call<DetailPlaylistModel>
 }

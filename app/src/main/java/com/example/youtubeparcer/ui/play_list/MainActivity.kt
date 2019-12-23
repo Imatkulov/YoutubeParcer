@@ -1,4 +1,4 @@
-package com.example.youtubeparcer.ui
+package com.example.youtubeparcer.ui.play_list
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.youtubeparcer.R
 import com.example.youtubeparcer.adapter.PlaylistAdapter
 import com.example.youtubeparcer.model.ItemsItem
@@ -20,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Suppress("DEPRECATION", "UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity() {
 
-
     private var viewModel: MainViewModel? = null
     private var adapter: PlaylistAdapter? = null
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         fetchPlaylist()
     }
     private fun initAdapter() {
-        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
         adapter = PlaylistAdapter() {item: ItemsItem -> clickItem(item)}
         recycler_view.adapter = adapter
 
@@ -45,21 +45,12 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("etag", item.etag)
         startActivity(intent)
     }
-
-//    private fun isOnline(context: Context): Boolean {
-//        noConnectionLatou(false)
-//        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//        val networkInfo = connectivityManager.activeNetworkInfo
-//        return networkInfo != null && networkInfo.isConnected
-//    }
-
         private fun fetchPlaylist(){
-        //TODO check internet
             if ( !NetworkUtils.isOnline(applicationContext)){
                 Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
                 showNoConnection(true)
             }
-        val data = viewModel?.getPlaylistData()
+        val data = viewModel?.getPlaylistData( )
         data?.observe(this, Observer<PlaylistModel> {
             val model: PlaylistModel? = data.value
             when {

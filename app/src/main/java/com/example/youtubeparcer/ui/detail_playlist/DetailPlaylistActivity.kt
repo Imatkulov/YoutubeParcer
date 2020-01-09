@@ -10,11 +10,8 @@ import com.example.youtubeparcer.R
 import com.example.youtubeparcer.adapter.DetailPlaylistAdapter
 import com.example.youtubeparcer.model.DetailPlaylistModel
 import com.example.youtubeparcer.model.ItemsItem
-import com.example.youtubeparcer.ui.detail_video.DetailVideoViewModel
 import com.example.youtubeparcer.ui.detail_video.DetailVideoActivity
 import kotlinx.android.synthetic.main.activity_detail_playlist.recycler_view
-import kotlinx.android.synthetic.main.activity_main.*
-
 class DetailPlaylistActivity : AppCompatActivity() {
 
     private lateinit var viewModel: DetailPlaylistViewModel
@@ -45,6 +42,7 @@ class DetailPlaylistActivity : AppCompatActivity() {
     private fun click(item: ItemsItem) {
         val intent = Intent(this, DetailVideoActivity::class.java)
         intent.putExtra("playlistId", id)
+        intent.putExtra("description", item.contentDetails.itemCount)
         intent.putExtra("videoId", item.snippet.resourceId.videoId)
         startActivity(intent)
     }

@@ -7,6 +7,11 @@ buildscript {
         jcenter()
         
     }
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
+    }
     ext {
         archLifecycleVersion = '2.2.0-rc02'
         androidxArchVersion = '2.1.0'
@@ -22,8 +27,8 @@ buildscript {
 allprojects {
     repositories {
         google()
+
         jcenter()
-        
     }
 }
 

@@ -17,8 +17,10 @@ import com.example.youtubeparcer.ui.detail_playlist.DetailPlaylistActivity
 import com.example.youtubeparcer.utils.NetworkUtils
 import com.example.youtubeparcer.utils.isShow
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-@Suppress("DEPRECATION", "UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity() {
 
     private var viewModel: MainViewModel? = null
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         initAdapter()
         fetchPlaylist()
+//        getDataFromDatabase()
     }
     private fun initAdapter() {
         recycler_view.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
@@ -55,14 +58,29 @@ class MainActivity : AppCompatActivity() {
             val model: PlaylistModel? = data.value
             when {
                 model != null -> {
-                    updateAdapterData(model)
+//                    updateAdapterData(model)
+                    updateDatabasePlayList(model)
+                    getDataFromDatabase()
                 }
             }
         })
 }
-    private fun updateAdapterData(list: PlaylistModel?) {
-        val data = list?.items
+    private fun updateAdapterData(model: PlaylistModel?) {
+        val data = model?.items
         adapter?.updateData(data)
+    }
+
+    private fun updateDatabasePlayList(model: PlaylistModel) {
+        model.let {  viewModel?.insertPlayListData(it)}
+    }
+
+    private fun getDataFromDatabase() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val model = viewModel?.getDataFromDB()
+            if (model != null && !model.items.isNullOrEmpty()) {
+                updateAdapterData(model)
+            }
+        }
     }
     fun restart(view: View) {
         if (! NetworkUtils.isOnline(applicationContext)){

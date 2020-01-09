@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -14,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -53,6 +55,15 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha03'
     implementation 'com.google.android.material:material:1.0.0'
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+    //exploer
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.4'
+    // for all video's links
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:1.9.0'
 
-
+    // Room components
+    implementation "androidx.room:room-runtime:2.2.3"
+    implementation "androidx.room:room-ktx:2.2.3"
+    annotationProcessor "androidx.room:room-compiler:2.2.3"
+    kapt "androidx.room:room-compiler:2.2.3"
+    androidTestImplementation "androidx.room:room-testing:2.2.3"
 }

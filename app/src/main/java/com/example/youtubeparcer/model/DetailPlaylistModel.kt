@@ -13,7 +13,4 @@ data class DetailPlaylistModel(
     @SerializedName("items")
     var items: List<ItemsItem>
 
-
-
-
 )

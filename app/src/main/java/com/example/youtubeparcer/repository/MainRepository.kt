@@ -11,7 +11,6 @@ import com.example.youtubeparcer.model.PlaylistModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-@Suppress("UNREACHABLE_CODE")
 class MainRepository {
     companion object {
         val channel = "UC_IfiZu3VkesO3L58L9WPhA"

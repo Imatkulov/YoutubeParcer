@@ -1,10 +1,10 @@
 package com.example.youtubeparcer.ui.play_list
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         initAdapter()
         fetchPlaylist()
-//        getDataFromDatabase()
+        getDataFromDatabase()
     }
     private fun initAdapter() {
         recycler_view.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             val model: PlaylistModel? = data.value
             when {
                 model != null -> {
-//                    updateAdapterData(model)
+                    updateAdapterData(model)
                     updateDatabasePlayList(model)
                     getDataFromDatabase()
                 }
@@ -70,18 +70,7 @@ class MainActivity : AppCompatActivity() {
         adapter?.updateData(data)
     }
 
-    private fun updateDatabasePlayList(model: PlaylistModel) {
-        model.let {  viewModel?.insertPlayListData(it)}
-    }
 
-    private fun getDataFromDatabase() {
-        CoroutineScope(Dispatchers.Main).launch {
-            val model = viewModel?.getDataFromDB()
-            if (model != null && !model.items.isNullOrEmpty()) {
-                updateAdapterData(model)
-            }
-        }
-    }
     fun restart(view: View) {
         if (! NetworkUtils.isOnline(applicationContext)){
             showNoConnection(true)
@@ -96,6 +85,18 @@ class MainActivity : AppCompatActivity() {
     private fun showNoConnection(isShown : Boolean){
         btnRestart.isShow(isShown)
         imageInet.isShow(isShown)
+    }
+    private fun updateDatabasePlayList(model: PlaylistModel) {
+        model.let {  viewModel?.insertPlayListData(it)}
+    }
+
+    private fun getDataFromDatabase() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val model = viewModel?.getDataFromDB()
+            if (model != null && !model.items.isNullOrEmpty()) {
+                updateAdapterData(model)
+            }
+        }
     }
 }
 

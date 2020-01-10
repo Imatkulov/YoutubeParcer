@@ -1,6 +1,5 @@
 package com.example.youtubeparcer.ui.detail_video
 
-import DownloadDialogAdapter
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DownloadManager
@@ -11,6 +10,7 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -21,6 +21,7 @@ import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.example.youtubeparcer.R
+import com.example.youtubeparcer.adapter.DownloadDialogAdapter
 import com.example.youtubeparcer.adapter.PlaylistAdapter
 import com.example.youtubeparcer.model.DetailVideoModel
 import com.example.youtubeparcer.model.YtVideo
@@ -51,7 +52,7 @@ class DetailVideoActivity : AppCompatActivity(), CallBacks.playerCallBack {
     private lateinit var playerManager: PlayerManager
 
     private var content: String? = null
-
+    private lateinit var imgBack: ImageView
     private lateinit var dialogDownloadButton: Button
     private lateinit var dialogRecyclerView: RecyclerView
 
@@ -68,10 +69,20 @@ class DetailVideoActivity : AppCompatActivity(), CallBacks.playerCallBack {
         formatsToShowList = ArrayList()
         playerManager = PlayerManager.getSharedInstance(this)
         player = playerManager.playerView.player
+        imgBack = findViewById(R.id.imgBack)
         getExtra()
         setupViews()
         fetchDetailVideo()
+
+        onBackPress()
     }
+
+    private fun onBackPress() {
+        imgBack.setOnClickListener {
+            finish()
+        }
+    }
+
 
     private fun getExtra() {
         videoId = intent?.getStringExtra("videoId")

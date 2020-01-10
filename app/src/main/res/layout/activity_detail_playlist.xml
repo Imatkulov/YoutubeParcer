@@ -25,7 +25,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_alignParentTop="true"
@@ -53,7 +53,7 @@
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/play_video"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="300dp"
                 android:layout_marginTop="200dp"
                 android:src="@drawable/ic_play_button"
@@ -75,11 +75,12 @@
             android:layout_height="match_parent"
             app:liftOnScroll="false"
             app:layout_scrollFlags="noScroll">
+
             <ImageView
                 android:id="@+id/imgBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:src="@drawable/arrow"
                 app:liftOnScroll="false"
                 app:layout_scrollFlags="noScroll"
